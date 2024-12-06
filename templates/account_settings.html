@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações de Conta</title>
+    <script>
+        function confirmAction(message, action) {
+            if (confirm(message)) {
+                document.getElementById(action).submit();
+            }
+        }
+    </script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<header class="bg-dark text-white p-3 mb-4">
+    <div class="container d-flex justify-content-between align-items-center">
+        <h1 style="color: rgb(255, 255, 255);" class="h4 mb-0">Você está autenticado.</h1>
+        <div>
+            <a href="{{ url_for('account_settings') }}" class="btn btn-outline-light btn-sm mx-2">Configurações de Conta</a>
+            <a href="{{ url_for('report') }}" class="btn btn-outline-light btn-sm mx-2">Gerar Relatório</a>
+            <a href="{{ url_for('logout') }}" class="btn btn-outline-light btn-sm mx-2">Sair</a>
+        </div>
+    </div>
+</header>
+
+<body style="background-color: #f8f9fa;">
+
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="col-md-6 bg-white p-4 rounded shadow-sm">
+            <h1 class="text-center mb-4">Configurações de Conta</h1>
+
+            <!-- Alterar Senha -->
+            <form action="{{ url_for('change_password') }}" method="GET">
+                <button type="submit" class="btn btn-warning btn-block mb-3">Alterar Senha</button>
+            </form>
+
+            <!-- Excluir Conta -->
+            <form action="{{ url_for('delete_account') }}" method="POST" id="deleteAccountForm" style="display:none;">
+            </form>
+            <button type="button" class="btn btn-danger btn-block" onclick="confirmAction('Tem certeza que deseja excluir sua conta?', 'deleteAccountForm')">Excluir Conta</button>
+
+            <br><br>
+            <a href="{{ url_for('home') }}" class="btn btn-secondary btn-block">Voltar para a Página Inicial</a>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
